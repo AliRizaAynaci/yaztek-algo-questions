@@ -13,3 +13,5 @@ Eğer **aynı sayı birden fazla yerde** geçiyorsa sonuç `true`, tüm sayılar
 
 ------
 
+### Benzer Soru (Contains Duplicate 2) 
+> https://leetcode.com/problems/contains-duplicate-ii/description/
