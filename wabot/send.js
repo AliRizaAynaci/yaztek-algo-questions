@@ -42,14 +42,14 @@ function readTitle(folder) {
 }
 // --------------------------------
 
+const CLIENT_ID    = 'algo-bot';
 const SESSION_ROOT = path.resolve(__dirname, "..", ".wwebjs_auth");
-const SESSION_DIR  = path.join(SESSION_ROOT, "session-algo-bot-v2");
+const SESSION_DIR  = path.join(SESSION_ROOT, `session-${CLIENT_ID}`);
 
 console.log('🔍 Session kontrolü...');
 console.log('📍 SESSION_ROOT:', SESSION_ROOT);
 console.log('📍 SESSION_DIR:', SESSION_DIR);
 
-// Daha detaylı session kontrolü
 if (!fs.existsSync(SESSION_ROOT)) {
   console.error("⚠️  Ana session dizini yok:", SESSION_ROOT);
   console.error("🔧 Çözüm: `node wabot/login.js` ile QR okutun.");
@@ -62,7 +62,6 @@ if (!fs.existsSync(SESSION_DIR)) {
   process.exit(1);
 }
 
-// Session içeriğini kontrol et
 const sessionFiles = fs.readdirSync(SESSION_DIR);
 if (sessionFiles.length === 0) {
   console.error("⚠️  Session klasörü boş!");
@@ -84,34 +83,16 @@ console.log('  - Week:', week);
 console.log('  - Title:', title);
 console.log('  - GitHub Link:', ghLink);
 
-// WhatsApp client - Aynı ayarları kullan
+// WhatsApp client
 const client = new Client({
   authStrategy: new LocalAuth({
-    clientId: "algo-bot",
+    clientId: CLIENT_ID,
     dataPath: SESSION_ROOT
-  }),
-  puppeteer: {
-    headless: true,
-    args: [
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
-      '--disable-dev-shm-usage',
-      '--disable-accelerated-2d-canvas',
-      '--no-first-run',
-      '--no-zygote',
-      '--disable-gpu',
-      '--disable-web-security',
-      '--disable-features=VizDisplayCompositor'
-    ],
-    timeout: 60000
-  }
+  })
+  // puppeteer: {...} YOK
 });
 
 let isReady = false;
-
-client.on("loading_screen", (percent, message) => {
-  console.log('⏳ Yükleniyor:', percent, '%', message);
-});
 
 client.on("authenticated", () => {
   console.log('🔐 Kimlik doğrulama başarılı');
@@ -121,7 +102,7 @@ client.on("ready", async () => {
   console.log("💬 Bot hazır, mesaj gönderiliyor...");
   isReady = true;
 
-  const target = "905422325682@c.us";
+  const target = "905392325682@c.us";
 
   const text =
     (title ? `📘 ${title}\n` : "") +
@@ -129,23 +110,19 @@ client.on("ready", async () => {
     `🔗 GitHub: ${ghLink}`;
 
   try {
-    // Önce resim varsa gönder
     const imgPath = path.join(process.cwd(), week, "image.png");
     if (fs.existsSync(imgPath)) {
       console.log('📷 Resim gönderiliyor...');
       const media = MessageMedia.fromFilePath(imgPath);
       await client.sendMessage(target, media);
       console.log('✅ Resim gönderildi!');
-      
-      // Resimden sonra biraz bekle
       await new Promise(resolve => setTimeout(resolve, 2000));
     }
-    
-    // Sonra metni gönder
+
     console.log('📝 Metin gönderiliyor...');
     await client.sendMessage(target, text);
     console.log("✅ Mesaj başarıyla gönderildi!");
-    
+
   } catch (err) {
     console.error("❌ Gönderim hatası:", err);
   } finally {
@@ -162,6 +139,7 @@ client.on("qr", (qr) => {
   console.error(`   rm -rf "${SESSION_ROOT}"`);
   console.error("   node wabot/login.js");
   qrcode.generate(qr, { small: true });
+  process.exit(1);
 });
 
 client.on("auth_failure", msg => {
