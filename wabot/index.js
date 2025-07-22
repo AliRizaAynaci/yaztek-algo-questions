@@ -1,14 +1,22 @@
 const { execSync } = require('child_process');
-const { Client } = require('whatsapp-web.js');
+const { Client, LocalAuth } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
 
-// Git üzerinden son commit’te değişen klasörleri al
-const changedFiles = execSync("git diff --name-only HEAD~1").toString().split('\n');
+// Git diff
+let changedFiles = [];
+try {
+    changedFiles = execSync("git diff --name-only HEAD~1").toString().split('\n');
+} catch (err) {
+    changedFiles = ['(ilk commit)'];
+}
+
 const changedFolders = [...new Set(changedFiles.map(f => f.split('/')[0]))];
 const latestWeek = changedFolders.find(f => f.startsWith('week-')) || 'Yeni klasör';
 
-// WhatsApp istemcisi
-const client = new Client();
+// WhatsApp client (persistent login)
+const client = new Client({
+    authStrategy: new LocalAuth()
+});
 
 client.on('qr', qr => {
     qrcode.generate(qr, { small: true });
