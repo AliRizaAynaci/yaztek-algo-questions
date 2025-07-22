@@ -1,6 +1,5 @@
 .vscode
-node_modules/
-
 .wwebjs_auth/
 .wwebjs_cache/
 node_modules/
+wabot/.last_hash
