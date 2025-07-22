@@ -1,0 +1,3 @@
+*.html linguist-detectable=false
+node_modules/* linguist-vendored
+wabot/.wwebjs_* linguist-vendored
