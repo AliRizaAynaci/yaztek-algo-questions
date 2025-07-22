@@ -121,7 +121,7 @@ client.on("ready", async () => {
   console.log("💬 Bot hazır, mesaj gönderiliyor...");
   isReady = true;
 
-  const target = "905392325682@c.us";
+  const target = "905422325682@c.us";
 
   const text =
     (title ? `📘 ${title}\n` : "") +

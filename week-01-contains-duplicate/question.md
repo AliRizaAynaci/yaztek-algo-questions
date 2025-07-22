@@ -12,3 +12,6 @@ Eğer **aynı sayı birden fazla yerde** geçiyorsa sonuç `true`, tüm sayılar
 `[1, 1, 1, 3, 3, 4, 3, 2, 4, 2]` → `true`
 
 ------
+
+### Benzer Soru (Contains Duplicate 2) 
+> https://leetcode.com/problems/contains-duplicate-ii/description/
