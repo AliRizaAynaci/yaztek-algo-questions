@@ -33,7 +33,7 @@ function latestWeekFolder() {
 
 function readTitle(folder) {
   try {
-    const p = path.join(process.cwd(), folder, "question.md");
+    const p = path.join(process.cwd(), folder, "README.md");
     if (!fs.existsSync(p)) return null;
     const md = fs.readFileSync(p, "utf8");
     const m = md.match(/^#{1,6}\s+(.*)$/m);
