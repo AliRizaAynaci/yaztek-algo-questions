@@ -1,2 +1,14 @@
 .vscode
 node_modules/
+
+# 1) Ignore et
+echo ".wwebjs_auth/"  >> .gitignore
+echo ".wwebjs_cache/" >> .gitignore
+echo "node_modules/"  >> .gitignore
+
+# 2) Remote’tan temizle (lokalde kalırlar)
+git rm -r --cached .wwebjs_auth .wwebjs_cache wabot/node_modules
+
+# 3) Commit + push
+git commit -m "cleanup: remove whatsapp session/cache from repo & ignore"
+git push origin main
