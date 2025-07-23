@@ -1,7 +1,7 @@
 
-## 1. Gorsel Icerigi
+## Soru: Dizide Aynı Eleman İki Kez Geçiyor mu? (217. Contains Duplicate)
 
-### Soru: Dizide Aynı Eleman İki Kez Geçiyor mu? (217. Contains Duplicate)
+### 1. Gorsel Icerigi
 
 Elinde `nums` adında bir tamsayı dizisi var. Bu dizide herhangi bir sayının **birden fazla kez** geçip geçmediğini kontrol etmen isteniyor.
 
@@ -11,7 +11,7 @@ Eğer **aynı sayı birden fazla yerde** geçiyorsa sonuç `true`, tüm sayılar
 
 <br/>
 
-## 2. Görsel Icerigi
+### 2. Görsel Icerigi
 
 ### Örnekler (Input → Output):
 
