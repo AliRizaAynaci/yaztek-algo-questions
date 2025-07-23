@@ -9,6 +9,10 @@
 
 using namespace std;
 
+// Time Complexity: O(n), 
+// -> her elemanı bir kez geziyoruz ve set işlemleri O(1).
+// Space Complexity: O(n), 
+// -> en kötü durumda tüm elemanlar sete eklenebilir.
 bool containsDuplicate(vector<int> &nums) {
     // Daha önce görülen sayılar burada tutulur
     unordered_set<int> set;
