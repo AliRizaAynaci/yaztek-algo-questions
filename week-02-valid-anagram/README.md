@@ -6,7 +6,6 @@ Elinde `s` ve `t` adında iki kelime (string) var.
 `t` kelimesi, `s` kelimesinin harfleri kullanılarak oluşturulmuş bir **anagram** mı?
 
 > Anagram: Harf sayıları aynı, sıralama farklı olabilir.
-
 > ⏱ Bu soruyu `O(n)` zaman ve `O(1)` ek bellekle çözmen mümkün.
 
 <br/>
