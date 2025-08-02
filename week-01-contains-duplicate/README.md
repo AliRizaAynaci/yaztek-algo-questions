@@ -1,5 +1,5 @@
 
-## Soru: Dizide Aynı Eleman İki Kez Geçiyor mu? (217. Contains Duplicate)
+## Dizide Aynı Eleman İki Kez Geçiyor mu? (217. Contains Duplicate)
 
 ### 1. Gorsel Icerigi
 
